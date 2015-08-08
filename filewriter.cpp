@@ -1,18 +1,14 @@
 #include "filewriter.h"
 
-FileWriter::FileWriter(const char* str):
-    power(0),
-    filename(str)
-     {}
-
-FileWriter::~FileWriter(){
-
-}
+FileWriter::FileWriter(const char* str): power(0), filename(str) {}
+FileWriter::~FileWriter(){}
 
 int FileWriter::getPower()
 {
     std::ifstream fp(filename.c_str(),std::ios::in);
-    if(!fp) {
+
+    if(fp.fail())
+    {
         return FW_ERROR;
     }
 
@@ -29,13 +25,15 @@ int FileWriter::getPower()
 
 
     fp.close();
-//
+    //
     return power;
 }
 
-int FileWriter::setPower(unsigned short p){
+int FileWriter::setPower(int p){
     std::ofstream fp(filename.c_str(), std::ios::out|std::ios::in|std::ios::binary);
-    if(!fp) {
+
+    if(fp.fail())
+    {
         return FW_ERROR;
     }
 

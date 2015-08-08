@@ -5,6 +5,10 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include "filewriter.h"
+#include "errors.h"
+
+#define WE_APP_TITLE "WarzoneEasy"
+
 namespace Ui {
 class MainWindow;
 }
@@ -22,6 +26,7 @@ public slots:
     void chooseFile();
 
 private:
+    void displayMessage(int msgType, const char* msg);
     Ui::MainWindow *ui;
 };
 

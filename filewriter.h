@@ -5,19 +5,18 @@
 #include <fstream>
 
 
-#define FW_ERROR -1;
+#define FW_ERROR -1
 
 class FileWriter
 {
 public:
     FileWriter(const char*str);
-    ~FileWriter();
-
+~FileWriter();
     int getPower();
-    int setPower(unsigned short);
+    int setPower(int);
 
 private:
-    unsigned short power;
+    int power;
     std::string filename;
 };
 

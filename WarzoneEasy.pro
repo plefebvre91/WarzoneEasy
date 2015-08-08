@@ -17,6 +17,7 @@ SOURCES += main.cpp\
     filewriter.cpp
 
 HEADERS  += mainwindow.h \
-    filewriter.h
+    filewriter.h \
+    errors.h
 
 FORMS    += mainwindow.ui
