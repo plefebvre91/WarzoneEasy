@@ -34,9 +34,10 @@ public:
 
     /**
      * @brief setPower
+     * @param p the new power to write
      * @return the power resource written in file, or FW_ERROR
      */
-    int setPower(int);
+    int setPower(int p);
 
 private:
     int power;

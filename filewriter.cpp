@@ -27,11 +27,9 @@ int FileWriter::getPower()
     fp.close();
 
     // Convert into unsigned int
-    for(int i=0;i<FW_POWER_DATA_SIZE;i++)
-    {
-        power |= bytes[i];
-        power <<= (FW_BYTE_SIZE - FW_BYTE_SIZE*i);
-    }
+    power |= bytes[0];
+    power <<= FW_BYTE_SIZE;
+    power |= bytes[1];
 
     return power;
 }
