@@ -14,10 +14,10 @@ public:
     ~FileWriter();
 
     int getPower();
-    int setPower(unsigned int power);
+    int setPower(unsigned short);
 
 private:
-    unsigned int power;
+    unsigned short power;
     std::string filename;
 };
 

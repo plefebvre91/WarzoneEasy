@@ -16,12 +16,9 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 void MainWindow::apply(){
-
-
-
     FileWriter fw(ui->txtFilePath->text().toStdString().c_str());
 
-    unsigned int power = ui->sldPower->value();
+    unsigned short power = (unsigned short)ui->sldPower->value();
     fw.setPower(power);
     ui->statusBar->setStatusTip(QString("Valeur mise a jour"));
 

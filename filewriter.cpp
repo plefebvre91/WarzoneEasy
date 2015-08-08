@@ -16,15 +16,15 @@ int FileWriter::getPower()
         return FW_ERROR;
     }
 
-    fp.seekg(52, fp.beg);
+    fp.seekg(54, fp.beg);
 
-    char bytes[4];
+    char bytes[2];
 
-    fp.read(bytes, 4);
-    for(int i=0;i<4;i++)
+    fp.read(bytes, 2);
+    for(int i=0;i<2;i++)
     {
         power |= bytes[i];
-        power <<= (24 - 8*i);
+        power <<= (8 - 8*i);
     }
 
 
@@ -33,23 +33,21 @@ int FileWriter::getPower()
     return power;
 }
 
-int FileWriter::setPower(unsigned int power){
-    std::ofstream fp(filename.c_str(),std::ios::binary);
+int FileWriter::setPower(unsigned short p){
+    std::ofstream fp(filename.c_str(), std::ios::out|std::ios::in|std::ios::binary);
     if(!fp) {
         return FW_ERROR;
     }
 
-    fp.seekp(52, fp.beg);
+    fp.seekp(54, fp.beg);
 
-    char bytes[4];
+    char bytes[2];
 
 
-    bytes[3] = (power & 0xFF);
-    bytes[2] =  ((power >> 8) & 0xFF);
-    bytes[1] =   ((power >> 16) & 0xFF);
-    bytes[0] =  ((power >> 24) & 0xFF);
+    bytes[1] = ((p) & 0x00FF);
+    bytes[0] = ((p >> 8) & 0x00FF);
 
-    fp.write(bytes, 4);
+    fp.write(bytes, 2);
     fp.close();
 
     return 0;
