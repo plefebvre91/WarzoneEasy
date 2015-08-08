@@ -7,33 +7,39 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Set title
     this->setWindowTitle(WE_APP_TITLE);
 
     ui->btnApply->setEnabled(false);
+
+    // Connect signals/slots
     QObject::connect(ui->btnApply, SIGNAL(clicked()), this, SLOT(apply()));
     QObject::connect(ui->btnFilePath, SIGNAL(clicked()), this, SLOT(chooseFile()));
     QObject::connect(ui->btnQuit, SIGNAL(clicked()), qApp, SLOT(quit()));
 }
 
 void MainWindow::apply(){
-    QFile f(ui->txtFilePath->text());
 
+    // Display error message if text field is empty
     if(ui->txtFilePath->text().isEmpty())
     {
         displayMessage(WE_ERROR, WE_EMPTY_FILE);
         return;
     }
 
+    // Display error message if file doesn't exist
+    QFile f(ui->txtFilePath->text());
     if(!f.exists())
     {
         displayMessage(WE_ERROR, WE_FILE_DOESNT_EXIST);
         return;
     }
 
-
+    // Open the game file and write the value from slider
     FileWriter fw(ui->txtFilePath->text().toStdString().c_str());
     int power = ui->sldPower->value();
 
+    // Display error message if update failed or success message otherwise
     if(fw.setPower(power) != FW_ERROR)
     {
         displayMessage(WE_INFO, WE_FILE_UPDATED);
@@ -46,25 +52,43 @@ void MainWindow::apply(){
 }
 
 void MainWindow::chooseFile(){
-    QString s = QFileDialog::getOpenFileName(this,
-         "Open saved game", "/home/pierre/.warzone2100-3.1/savegames/campaign/", "Game Files (*.gam)");
+
+    // Build the warzone game files directory
+    QString dir(getenv("HOME"));
+    dir.append(WE_WARZONE_DIR);
+
+    // Get the filename from a file chooser dialog
+    QString s = QFileDialog::getOpenFileName(this, "Open saved game", dir, "Game Files (*.gam)");
+
+    if(s.isEmpty())
+    {
+        displayMessage(WE_ERROR, WE_EMPTY_FILE);
+        return;
+    }
+
+    // Update text field
     ui->txtFilePath->setText(s);
 
-
+    // Update 'apply' button state
     ui->btnApply->setEnabled(true);
+
+    // Open the game file
     FileWriter fw(s.toStdString().c_str());
 
+    // Get the current power resource value
     int currentPower = fw.getPower();
 
+    // Return if it's failed
     if(currentPower == FW_ERROR)
     {
         displayMessage(WE_INFO, WE_FILE_UPDATED);
         ui->btnApply->setEnabled(false);
+        return;
     }
 
+    // Update slider and label value
     ui->sldPower->setValue(currentPower);
     ui->lblPower->setNum((int)currentPower);
-
 }
 
 void MainWindow::displayMessage(int msgType, const char* msg) {
