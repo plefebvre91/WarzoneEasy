@@ -11,7 +11,16 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string notr="true">WarzoneEasy</string>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="animated">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="verticalLayoutWidget">
@@ -44,7 +53,7 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Indiquer le fichier de sauvegarde</string>
+            <string>Choose the saved game file on which apply modifications</string>
            </property>
           </widget>
          </item>
@@ -53,19 +62,22 @@
            <item>
             <widget class="QLabel" name="lblFilePath">
              <property name="text">
-              <string>Chemin:</string>
+              <string>Path:</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLineEdit" name="txtFilePath">
              <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Indique le fichier de sauvegarde (il se trouve en principe dans ~/home/pierre&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Saved are usually stored in ~/.warzone-2100/savedgames/campaign&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QToolButton" name="btnFilePath">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Choose the saved game file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="text">
               <string>...</string>
              </property>
@@ -102,7 +114,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Ajuster le niveau d'énergie</string>
+          <string>Update power level</string>
          </property>
         </widget>
        </item>
@@ -200,7 +212,7 @@
        <item>
         <widget class="QPushButton" name="btnApply">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Appliquer la nouvelle valeur&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Update the game file with the new value (you'll have to restart Warzone)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>Apply</string>
@@ -210,7 +222,7 @@
        <item>
         <widget class="QPushButton" name="btnQuit">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Quitter&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Quit WarzoneEasy&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>Quit</string>
